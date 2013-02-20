@@ -18,8 +18,12 @@ Thread.new {
   bot.start
 }
 
+# Pivotal Activity Web Hook documentation:
+#   https://www.pivotaltracker.com/help/integrations?version=v3#activity_web_hook
 post '/' do 
   doc = Nokogiri::XML(request.body.read)
-  bot.channel_list.first.msg(doc.xpath('/activity/description').text)
+  desc = doc.xpath('/activity/description').text
+  url = doc.xpath('/activity/stories/story/url').text
+  bot.channel_list.first.msg(desc + ' ' + url)
 end
 
