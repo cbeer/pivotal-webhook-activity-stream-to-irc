@@ -23,7 +23,11 @@ Thread.new {
 post '/' do 
   doc = Nokogiri::XML(request.body.read)
   desc = doc.xpath('/activity/description').text
-  url = doc.xpath('/activity/stories/story/url').text
-  bot.channel_list.first.msg(desc + ' ' + url)
+  
+  # /activity/stories/story/url returns a URL of the form http://www.pivotaltracker.com/services/v3/projects/<project_id>/stories/<story_id> which isn't browser-actionable (access denied)
+  #url = doc.xpath('/activity/stories/story/url').text
+
+  story_id = doc.xpath('/activity/stories/story/id').text
+  bot.channel_list.first.msg(desc + ' https://www.pivotaltracker.com/story/show/' + story_id)
 end
 
