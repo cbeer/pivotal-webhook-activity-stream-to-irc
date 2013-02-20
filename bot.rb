@@ -20,6 +20,6 @@ Thread.new {
 
 post '/' do 
   doc = Nokogiri::XML(request.body.read)
-  bot.channel_list.first.msg(doc.xpath('/activity/author').text + ": " + doc.xpath('/activity/description').text )
+  bot.channel_list.first.msg(doc.xpath('/activity/description').text)
 end
 
