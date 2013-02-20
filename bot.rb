@@ -4,7 +4,7 @@ require 'nokogiri'
 
 bot = Cinch::Bot.new do
   configure do |c|
-  	c.nick = "ff-pivotal"
+  	c.nick = "ff-pivotal2"
     c.server = "irc.freenode.org"
     c.channels = ["#duraspace-ff"]
   end
